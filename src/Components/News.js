@@ -10,12 +10,12 @@ const News = (props) => {
     const [page, setPage] = useState(1)
     const [totalResults, setTotalResult] = useState(0)
 
-    
 
-    const capitalizeFirstLetter = (string)=> {
+
+    const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-   
+
 
 
     const updateNews = async () => {
@@ -30,51 +30,17 @@ const News = (props) => {
         setLoading(false)
     }
     useEffect(() => {
-        
+
         document.title = `NewsMonkey - ${capitalizeFirstLetter(props.category)}`;
         updateNews();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
 
-    // handlePrevPage = async () => {
-    //     // let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=8ee6e1591e7744438a588efcfe26ecdc&page=${page - 1}&pageSize=${props.pageSize}`;
-    //     // this.setState({
-    //     //     loading: true
-    //     // })
-    //     // let data = await fetch(url)
-    //     // let parsedData = await data.json()
-    //     // console.log(parsedData)
-    //     // this.setState({
-    //     //     page: page - 1,
-    //     //     articles: parsedData.articles,
-    //     //     loading: false
-    //     // })
-    //     this.setState({
-    //         page: page - 1
-    //     })
-    //     this.updateNews()
-    // }
-    // handleNextPage = async () => {
-    //     // let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=8ee6e1591e7744438a588efcfe26ecdc&page=${page + 1}&pageSize=${props.pageSize}`;
-    //     // this.setState({
-    //     //     loading: true
-    //     // })
-    //     // let data = await fetch(url)
-    //     // let parsedData = await data.json()
-    //     // console.log(parsedData)
-    //     // this.setState({
-    //     //     page: page+1,
-    //     //     articles: parsedData.articles,
-    //     //     loading: false
-    //     // })
-    //     this.setState({
-    //         page: page + 1
-    //     })
-    //     this.updateNews()
-    // }
+
     const fetchMoreData = async () => {
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`
         setPage(page + 1)
         // setLoading(true)
         let data = await fetch(url)
@@ -88,7 +54,7 @@ const News = (props) => {
 
     return (
         <>
-            <h1 className='text-center' style={{margin:'90px 0 0'}} >
+            <h1 className='text-center' style={{ margin: '90px 0 0' }} >
                 <b>NewsMonkey</b> - Top {capitalizeFirstLetter(props.category)} headlines
             </h1>
             {loading && <Spinner />}
@@ -101,13 +67,6 @@ const News = (props) => {
                 <div className="container">
 
                     <div className="row">
-                        {/* {!loading && articles.map((element) => {
-                            return <div className="col-md-4" key={element.url}>
-                            <NewsItem title={element.title} description={element.description}
-                            imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} />
-                            </div>
-                        })} */}
-
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>
                                 <NewsItem title={element.title} description={element.description}
@@ -117,11 +76,6 @@ const News = (props) => {
                     </div>
                 </div>
             </InfiniteScroll>
-            {/* <div className="d-flex justify-content-between">
-                    <button disabled={page <= 1} type="button" className="btn btn-dark" onClick={this.handlePrevPage} > &larr; Prev</button>
-                    <button disabled={page + 1 > Math.ceil(totalResults / props.pageSize)} type="button" className="btn btn-dark" onClick={this.handleNextPage} >Next &rarr; </button>
-                </div> */}
-
         </>
     )
 }
