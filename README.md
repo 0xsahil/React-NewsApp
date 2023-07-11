@@ -1,4 +1,4 @@
-##News App
+# News App
 
 The News App is a web application that allows users to access and read the latest and trending news based on their selected country. It is built using React.js and Bootstrap, providing an intuitive and seamless user experience.
 
